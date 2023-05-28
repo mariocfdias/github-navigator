@@ -1,24 +1,26 @@
-import {  StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { Entypo  } from '@expo/vector-icons'; 
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
-export const ListItem = ({title, description, icon}) => {
+
+export const ListItem = ({ title, description, icon, onPress }) => {
 
     return (
-        <TouchableOpacity style={itemStyles.container}>
+        <TouchableOpacity
+            onPress={onPress}
+            style={itemStyles.container}>
             <View style={itemStyles.iconContainer}>
-
-            {icon}
+                {icon}
             </View>
             <View style={itemStyles.descriptionContainer}>
 
-            <Text style={itemStyles.title}>{title}</Text>
-            <Text style={itemStyles.description}>{description}</Text>
+                <Text style={itemStyles.title}>{title}</Text>
+                <Text style={itemStyles.description}>{description}</Text>
             </View>
 
             <View style={itemStyles.endIconContainer}>
                 <Entypo name="chevron-right" size={24} color="black" />
             </View>
-            
+
         </TouchableOpacity>
     )
 }
@@ -31,21 +33,22 @@ const itemStyles = StyleSheet.create({
         gap: 10,
         alignItems: "center",
         border: 1,
-      },
-     title: {
+    },
+    title: {
         fontSize: 24,
         fontWeight: "500"
-     },
-     description: {
+    },
+    description: {
         fontSize: 16,
         fontWeight: "200"
-     },
-     iconContainer: {
+    },
+    iconContainer: {
         justifyContent: "center",
         alignItems: "center"
 
-     },
-     endIconContainer: {
+    },
+    endIconContainer: {
         marginLeft: "auto"
-     }
+    },
+
 })
