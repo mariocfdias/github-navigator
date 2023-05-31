@@ -33,9 +33,9 @@ export default function Orgs({ route, navigation }) {
 
             <FlatList
                 data={orgList}
-                renderItem={({ item }) => <ListItem title={item.name} description={item.description} icon={item.icon} />}
+                renderItem={({ item }) => <ListItem title={item.name} description={item.description} icon={item.icon} navigable={false}/>}
                 ItemSeparatorComponent={() => <View style={{ height: 2, backgroundColor: "#F7F8FC" }} />}
-                keyExtractor={item => item.title}
+                keyExtractor={item => item.name}
                 style={styles.listStyle}
                 ListEmptyComponent={NotFoundComponent}
             />

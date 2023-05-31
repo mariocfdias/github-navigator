@@ -14,15 +14,7 @@ const ProfileIcon = ({ imageUrl }) => {
 
 }
 
-{
-    /*
-            {
-            icon: <ProfileIcon imageUrl="https://fastly.picsum.photos/id/446/200/200.jpg?hmac=PkaLcCtgL4IvAz-gsxbCXz_tl0qdVUGOrxhYLrywa-c" />,
-            name: "bt-championship-manager",
-            description: "bt-championship-manager",
-        },
-    */
-}
+
 export default function Followers({ route, navigation }) {
 
     const { followers } = route.params
@@ -34,13 +26,14 @@ export default function Followers({ route, navigation }) {
             return {
                 icon: <ProfileIcon imageUrl={follower.avatar_url} />,
                 name: follower.login,
-                description: follower.html_url
+                description: follower.html_url,
+                url: follower.url
             }
         })
 
         setFollowerList(mappedFollowers)
 
-        console.log({ mappedFollowers })
+        console.log( followers[0] )
 
     }, [followers])
 
@@ -49,7 +42,27 @@ export default function Followers({ route, navigation }) {
 
             <FlatList
                 data={followerList}
-                renderItem={({ item }) => <ListItem title={item.name} description={item.description} icon={item.icon} />}
+                renderItem={({ item }) => <ListItem 
+                title={item.name} 
+                description={item.description} 
+                icon={item.icon} 
+                onPress={async () => {
+                    fetch(item.url).then(res => {
+                      return res.json()
+                    }).then((response) => {
+                      console.log(response)
+                      if(response.message == "Not Found"){
+                        createAlert(inputValue)
+                      }else{
+                        navigation.push("Bio", { user: response })
+          
+                      }
+                    }).catch(error => {
+                    })
+          
+          
+                  }}
+                />}
                 ItemSeparatorComponent={() => <View style={{ height: 2, backgroundColor: "#F7F8FC" }} />}
                 keyExtractor={item => item.name}
                 style={styles.listStyle}

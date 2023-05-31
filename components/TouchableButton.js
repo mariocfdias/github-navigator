@@ -1,12 +1,12 @@
 import { TouchableHighlight, View, Text, StyleSheet} from "react-native";
 
-export default function TouchableButton ({onPress, children}) {
+export default function TouchableButton ({onPress, text, icon}) {
     return (
 
-          <TouchableHighlight onPress={onPress}>
+          <TouchableHighlight onPress={onPress} style={styles.container}>
             <View style={styles.button}>
-            <Text>{children}</Text>
-
+            <Text style={styles.text}>{icon} {text}</Text>
+ 
             </View>
           </TouchableHighlight>
       );
@@ -17,18 +17,22 @@ export default function TouchableButton ({onPress, children}) {
     const styles = StyleSheet.create({
         container: {
             justifyContent: 'center',
-            borderRadius: 40
+            borderRadius: 10,
             },
           button: {
               alignItems: 'center',
-              backgroundColor: '#DDDDDD',
+              backgroundColor: '#ffffff',
+              borderWidth: 2,
+              borderRadius: 10,
+              borderColor: "#4d4c4c",
               padding: 10,
           },
-          countContainer: {
-              alignItems: 'center',
-              padding: 10,
-          },
-    countText: {
-      color: '#FF00FF',
-  },
+          text: {
+            fontSize: 20,
+            textAlign: "center",
+            alignItems: "center",
+            justifyContent: "center"
+          }
+
+
 });

@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-export const ListItem = ({ title, description, icon, onPress }) => {
+export const ListItem = ({ title, description, icon, onPress, navigable = true }) => {
 
     return (
         <TouchableOpacity
@@ -18,7 +18,7 @@ export const ListItem = ({ title, description, icon, onPress }) => {
             </View>
 
             <View style={itemStyles.endIconContainer}>
-                <Entypo name="chevron-right" size={24} color="black" />
+                {navigable && <Entypo name="chevron-right" size={24} color="black" />}
             </View>
 
         </TouchableOpacity>
@@ -44,7 +44,12 @@ const itemStyles = StyleSheet.create({
     },
     iconContainer: {
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        borderWidth: 2,
+        borderColor: "#f1f1f2",
+        borderRadius: 10,
+        padding: 5,
+
 
     },
     endIconContainer: {

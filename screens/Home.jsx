@@ -1,15 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TextInput, Alert, View } from 'react-native';
 import TouchableButton from "../components/TouchableButton";
 export default function Home({ navigation }) {
 
   const [inputValue, setInputValue] = useState("")
   const [githubValues, setGithubValues] = useState({})
 
-  const handleSearchButton = () => {
-
-  }
+  const createAlert = (username) =>
+  Alert.alert('Usuario não encontrado', `Não foi encontrado usuario com nome ${username}`, [
+    {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -18,19 +19,23 @@ export default function Home({ navigation }) {
         style={styles.usernameInput}
         value={inputValue}
         onChangeText={(text) => {
-          console.log(text)
           setInputValue(text)
         }
         }
       />
       <TouchableButton
-        text="Buscar"
+      text="Buscar"
         onPress={async () => {
           fetch(`https://api.github.com/users/${inputValue}`).then(res => {
             return res.json()
           }).then((response) => {
             console.log(response)
-            navigation.push("Bio", { user: response })
+            if(response.message == "Not Found"){
+              createAlert(inputValue)
+            }else{
+              navigation.push("Bio", { user: response })
+
+            }
           }).catch(error => {
           })
 
