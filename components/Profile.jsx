@@ -2,7 +2,7 @@ import { Alert, Image, StyleSheet, Text, TextInput, TouchableHighlight, View } f
 import { Entypo } from '@expo/vector-icons';
 import { useState } from "react";
 
-export default Profile = ({ profileImageUrl, username, usertag, navigation }) => {
+export default Profile = ({ profileImageUrl, username, usertag, navigation, renderSearch = true }) => {
     const [isSearchFormVisible, setSearchFormVisible] = useState(false)
     const [inputValue, setInputValue] = useState("")
 
@@ -17,7 +17,7 @@ export default Profile = ({ profileImageUrl, username, usertag, navigation }) =>
                 source={{ uri: profileImageUrl }}
                 style={profileStyles.image}
             />
-            <TouchableHighlight 
+            {renderSearch && <TouchableHighlight 
             style={profileStyles.search}
             onPress={() => {
                     setSearchFormVisible(!isSearchFormVisible)
@@ -25,7 +25,7 @@ export default Profile = ({ profileImageUrl, username, usertag, navigation }) =>
             }}
             >
                 {isSearchFormVisible ? <Entypo name="cross" size={24} color="white" /> : <Entypo name="magnifying-glass" size={24} color="white" /> }
-            </TouchableHighlight>
+            </TouchableHighlight>}
             <Text style={profileStyles.username}>{username || usertag}</Text>
             <Text style={profileStyles.usertag}>{usertag}</Text>
            { 

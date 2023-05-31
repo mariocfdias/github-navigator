@@ -15,6 +15,7 @@ export default function Info({ route, navigation }) {
                 profileImageUrl={info.profileImageUrl}
                 username={info.username}
                 usertag={info.usertag}
+                renderSearch={false}
             />
 
 
